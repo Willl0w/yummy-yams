@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { tokenVerifier } from "../middlewares/tokenVerifier";
-import { playGame } from "../controllers/yams";
+import { tokenVerifier } from "../middlewares/tokenVerifier.js";
+import { playGame } from "../controllers/yams.js";
 
 const YamsRouter = Router();
 

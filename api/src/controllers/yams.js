@@ -1,5 +1,5 @@
-import User from "../models/user";
-import Pastry from "../models/pastries";
+import User from "../models/user.js";
+import Pastry from "../models/pastries.js";
 
 // Function to check how much pastries the user has won
 const fourOfAKind = (dices) => {
