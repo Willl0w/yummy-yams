@@ -4,12 +4,12 @@ import { setUser, RootState } from "../store";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import DiceSixFacesOne from "../images/dice-six-faces-one";
-import DiceSixFacesTwo from "../images/dice-six-faces-two";
-import DiceSixFacesThree from "../images/dice-six-faces-three";
-import DiceSixFacesFour from "../images/dice-six-faces-four";
-import DiceSixFacesFive from "../images/dice-six-faces-five";
-import DiceSixFacesSix from "../images/dice-six-faces-six";
+import DiceOneFace from "../images/dice-one-face";
+import DiceTwoFace from "../images/dice-two-face";
+import DiceThreeFace from "../images/dice-three-face";
+import DiceFourFace from "../images/dice-four-face";
+import DiceFiveFace from "../images/dice-five-face";
+import DiceSixFacesFour from "../images/dice-four-face";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -18,7 +18,6 @@ export default function Home() {
   const [token, setToken] = useState("");
   const [message, setMessage] = useState("");
   const [dice, setDice] = useState([1, 1, 1, 1, 1]);
-  const baseURL = process.env.REACT_APP_API_BASE_URL;
 
   const dispatch = useDispatch();
 
@@ -36,7 +35,7 @@ export default function Home() {
 
   const handlePlay = async () => {
     try {
-      const response = await axios.get(`${baseURL}/game/play`, {
+      const response = await axios.get(`http://localhost:3001/game/play`, {
         headers: {
           "auth-token": token,
         },
@@ -56,14 +55,13 @@ export default function Home() {
     <div>
       <h2>Home</h2>
       <p>{message ? message : `Welcome to Yummi Yam's, ${user.username} !`}</p>
-      <p>tentatives restantes : {3 - user.game_played}</p>
       <div style={{ display: "flex" }}>
         {dice &&
-          dice.map((value, index) => <DiceImage key={index} value={value} />)}
+          dice.map((value, index) => <DiceFaces key={index} value={value} />)}
       </div>
       {(!userCanPlay || user.winner.length > 0) && (
         <>
-          <p>Votre partie est terminée</p>
+          <p>Your game is over</p>
           <p>
             {user.winner.length > 0
               ? `Congrats! You've won ${user.winner.length} pastries`
@@ -81,30 +79,28 @@ export default function Home() {
       )}
       {userCanPlay && user.winner.length === 0 && (
         <>
-          <p>tentatives restantes : {3 - user.game_played}</p>
-          <button onClick={handlePlay}>Jouer</button>
+          <p>remaining launch : {3 - user.game_played}</p>
+          <button onClick={handlePlay}>Play</button>
         </>
       )}
-
-      <button onClick={handlePlay}>Play !</button>
     </div>
   );
 }
 
-const DiceImage: React.FC<{ value: number }> = ({ value }) => {
+const DiceFaces: React.FC<{ value: number }> = ({ value }) => {
   switch (value) {
     case 1:
-      return <DiceSixFacesOne />;
+      return <DiceOneFace />;
     case 2:
-      return <DiceSixFacesTwo />;
+      return <DiceTwoFace />;
     case 3:
-      return <DiceSixFacesThree />;
+      return <DiceThreeFace />;
     case 4:
-      return <DiceSixFacesFour />;
+      return <DiceFourFace />;
     case 5:
-      return <DiceSixFacesFive />;
+      return <DiceFiveFace />;
     case 6:
-      return <DiceSixFacesSix />;
+      return <DiceSixFacesFour />;
     default:
       return null;
   }
