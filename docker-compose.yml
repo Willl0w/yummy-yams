@@ -4,12 +4,12 @@ services:
   api:
     build: ./api
     ports:
-      - 3001:3001
+      - 3306:3306
     volumes:
       - ./api:/usr/src/app
     environment:
       - NODE_ENV=development
-      - PORT=3001
+      - PORT=3306
       - ME_CONFIG_MONGODB_SERVER=mongo
       - ME_CONFIG_MONGODB_ADMINUSERNAME=root
       - ME_CONFIG_MONGODB_ADMINPASSWORD=foobar
@@ -17,7 +17,6 @@ services:
       - ME_CONFIG_BASICAUTH_PASSWORD=admin
     depends_on:
       - mongo
-    restart: always
 
   app:
     build: ./app
@@ -28,10 +27,10 @@ services:
       - /usr/src/app/node_modules
     environment:
       - NODE_ENV=development
-      - REACT_APP_API_URL=http://api:3001
-    command: npm run dev
+      - REACT_APP_API_URL=http://api:3306
     depends_on:
       - api
+    restart: always
 
   mongo:
     image: mongo:latest

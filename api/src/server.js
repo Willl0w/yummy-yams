@@ -10,7 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
-const port = 3001;
+const port = 3306;
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors({ origin: true, credentials: true }));
@@ -27,6 +27,7 @@ mongoose
     useUnifiedTopology: true,
     user: "root",
     pass: "foobar",
+    authSource: "admin",
   })
   .then(() => {
     console.log("Connected to the database");

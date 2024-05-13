@@ -14,4 +14,4 @@ RUN npm install
 COPY . .
 
 # Commande par défaut pour démarrer l'API
-CMD ["npm", "start"]
+CMD ["node", "./src/server.js"]
