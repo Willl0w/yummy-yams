@@ -49,7 +49,7 @@ const givePastries = async (user, quantity, type) => {
     id: user._id,
     email: user.email,
     username: user.username,
-    games_played: user.games_played,
+    game_played: user.game_played,
     winner: user.winner,
     type: type,
   };
@@ -62,14 +62,14 @@ export const playGame = async (req, res) => {
   if (!user) {
     return res.status(404).json({ message: "User not found" });
   }
-  if (user.games_played >= 3) {
+  if (user.game_played >= 3) {
     return res.status(400).json({
       message: "You have already played 3 games",
       user: {
         id: user._id,
         email: user.email,
         username: user.username,
-        games_played: user.games_played,
+        game_played: user.game_played,
         winner: user.winner,
       },
       dice_table: [],
@@ -82,14 +82,14 @@ export const playGame = async (req, res) => {
         id: user._id,
         email: user.email,
         username: user.username,
-        games_played: user.games_played,
+        game_played: user.game_played,
         winner: user.winner,
       },
       dice_table: [],
     });
   }
 
-  user.games_played += 1;
+  user.game_played += 1;
 
   //Roll the dices
   let dice_table = [];
@@ -139,7 +139,7 @@ export const playGame = async (req, res) => {
       id: user._id,
       email: user.email,
       username: user.username,
-      games_played: user.games_played,
+      game_played: user.game_played,
       winner: user.winner,
     },
     dice_table: dice_table,

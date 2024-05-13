@@ -4,6 +4,10 @@ import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   const { username, password, email } = req.body;
+  if (!email || !username || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
   const user = new User({
@@ -32,6 +36,14 @@ export const register = async (req, res) => {
     console.log(user);
     res.status(201).json(userdatas);
   } catch (error) {
+    if (error.code === 11000) {
+      return res
+        .status(400)
+        .json({
+          message:
+            "This user already exist. Please use another email and username",
+        });
+    }
     res.status(400).json({ message: error.message });
   }
 };

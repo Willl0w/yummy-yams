@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  games_played: {
+  game_played: {
     type: Number,
     default: 0,
   },
