@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import AuthRouter from "./routers/auth.js";
 import YamsRouter from "./routers/yams.js";
+import AdminRouter from "./routers/admin.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 });
 app.use("/auth", AuthRouter);
 app.use("/yams", YamsRouter);
+app.use("/admin", AdminRouter);
 
 mongoose
   .connect("mongodb://mongo/yams", {
