@@ -20,7 +20,7 @@ export const register = async (req, res) => {
     const token = jwt.sign(
       { id: user._id, email },
       process.env.TOKEN || "TOKEN",
-      { expiresIn: "2h" }
+      { expiresIn: "1h" }
     );
 
     user.token = token;
@@ -37,12 +37,10 @@ export const register = async (req, res) => {
     res.status(201).json(userdatas);
   } catch (error) {
     if (error.code === 11000) {
-      return res
-        .status(400)
-        .json({
-          message:
-            "This user already exist. Please use another email and username",
-        });
+      return res.status(400).json({
+        message:
+          "This user already exist. Please use another email and username",
+      });
     }
     res.status(400).json({ message: error.message });
   }
@@ -64,7 +62,7 @@ export const login = async (req, res) => {
   const token = jwt.sign(
     { id: user._id, email: user.email },
     process.env.TOKEN || "TOKEN",
-    { expiresIn: "2h" }
+    { expiresIn: "1h" }
   );
   user.token = token;
   user.password = undefined;
