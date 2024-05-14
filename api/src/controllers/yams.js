@@ -1,7 +1,6 @@
 import User from "../models/user.js";
 import Pastry from "../models/pastries.js";
 
-// Function to check how much pastries the user has won
 const fourOfAKind = (dices) => {
   const sameDice = dices.filter((value) => value === dices[0]);
   if (sameDice.length === 4) {
@@ -17,18 +16,18 @@ const twoPairs = (dices) => {
   }
   let pairs = 0;
   for (let dice in occurs) {
-    if (occurs[dice] === 2) {
+    if (occurs[dice] >= 2) {
       pairs++;
     }
   }
+  console.log(occurs);
   return pairs >= 2;
 };
 
-// Function to give pastries to the user
 const givePastries = async (user, quantity, type) => {
   const pastries = await Pastry.aggregate([
     { $match: { stock: { $gt: 0 } } },
-    { $pastry: { size: quantity } },
+    { $sample: { size: quantity } },
   ]);
   const winnerData = [];
   for (let pastry of pastries) {
@@ -63,7 +62,7 @@ export const playGame = async (req, res) => {
     return res.status(404).json({ message: "User not found" });
   }
   if (user.game_played >= 3) {
-    return res.status(400).json({
+    return res.status(200).json({
       message: "You have already played 3 games",
       user: {
         id: user._id,
