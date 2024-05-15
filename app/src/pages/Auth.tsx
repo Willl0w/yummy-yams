@@ -57,20 +57,23 @@ export default function Auth() {
             value={email}
             onChange={(e) => setEmail(e)}
             placeholder="Email"
+            label="Email"
           />
           <Input
             type="text"
             value={username}
             onChange={(e) => setUsername(e)}
             placeholder="Username"
+            label="Username"
           />
           <Input
             type="password"
             value={password}
             onChange={(e) => setPassword(e)}
             placeholder="Password"
+            label="Password"
           />
-          {errorMessage && <p>{errorMessage}</p>}{" "}
+          {errorMessage && <p className="text-red-500">{errorMessage}</p>}{" "}
           <Button type="default" onClick={handleSignup}>
             Create
           </Button>
