@@ -10,6 +10,7 @@ interface Winner {
   name: string;
   image: string;
   date: string;
+  time: string;
 }
 
 interface User {
@@ -78,12 +79,13 @@ const Results: React.FC = () => {
         </div>
       </div>
 
-      <table className="border-collapse border border-slate-300 rounded-3xl	w-5/6 ">
+      <table className="border-collapse ring-1 ring-slate-300 rounded-3xl	w-5/6 overflow-hidden">
         <thead className="p-4 rounded-xl">
           <tr className="divide-x divide-slate-300 bg-slate-200">
             <th className="p-4">User</th>
             <th>Pastries</th>
             <th>Winning date</th>
+            <th>Winning time</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-300">
@@ -101,6 +103,13 @@ const Results: React.FC = () => {
                 <ul className="results-list">
                   {user.winner.map((winner, index) => (
                     <li key={index}>{winner.date}</li>
+                  ))}
+                </ul>
+              </td>
+              <td>
+                <ul className="results-list">
+                  {user.winner.map((winner, index) => (
+                    <li key={index}>{winner.time}</li>
                   ))}
                 </ul>
               </td>
