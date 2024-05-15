@@ -34,7 +34,8 @@ const givePastries = async (user, quantity, type) => {
     let data = {
       name: pastry.name,
       image: pastry.image,
-      date: new Date().toLocaleDateString(),
+      date: new Date().toLocaleDateString("fr-FR"),
+      time: new Date().toLocaleTimeString("fr-FR"),
     };
     winnerData.push(data);
     await Pastry.findOneAndUpdate(
