@@ -16,8 +16,6 @@ export default function Login() {
   const navigate = useNavigate();
   const baseURL = process.env.REACT_APP_API_BASE_URL;
 
-  console.log(baseURL);
-
   const handleLogin = async () => {
     try {
       const response = await axios.post(`${baseURL}/auth/login`, {

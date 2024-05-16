@@ -20,7 +20,6 @@ const twoPairs = (dices) => {
       pairs++;
     }
   }
-  console.log(occurs);
   return pairs >= 2;
 };
 

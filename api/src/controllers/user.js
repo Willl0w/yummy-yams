@@ -33,7 +33,6 @@ export const register = async (req, res) => {
       game_played: user.game_played,
       winner: user.winner,
     };
-    console.log(user);
     res.status(201).json(userdatas);
   } catch (error) {
     if (error.code === 11000) {
